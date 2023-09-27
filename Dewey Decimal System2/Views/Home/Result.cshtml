@@ -1,0 +1,32 @@
+﻿@model bool
+@{
+    ViewData["Title"] = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<div class="container">
+    <h1 class="text-center">Result</h1>
+
+    @if (Model)
+    {
+        // This will display if the ordering is CORRECT
+        <p class="text-success">Congratulations! You got the ordering right.</p>
+        //A badge will be shown in GREEN with "CORRECT" as part of the gamefication feature
+        <div class="badge badge-success">CORRECT!!</div>
+    }
+    else
+    {
+        // This will display if the ordering is INCORRECT
+        <p class="text-danger">Oops! The ordering is incorrect. Let's try again.</p>
+        //A badge will be shown in RED with "INCORRECT" as part of the gamefication feature
+        <div class="badge badge-danger">INCORRECT!!</div>
+    }
+
+    <a asp-action="ReplacingBooks" class="btn btn-primary">Try Again</a>
+</div>
+@*(Wilkins, J. (2021))*@
+
+
+@*[7]Wilkins, J. (2021) Python sort list – how to order by descending or ascending, freecodecamp.org. Available at: 
+https://www.freecodecamp.org/news/python-sort-list-how-to-order-by-descending-or-ascending/ (Accessed: September 26, 2023).*@
+

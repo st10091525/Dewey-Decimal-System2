@@ -1,0 +1,59 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Replacing Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1 class="text-center">Replacing Books</h1>
+    <p>Reorder the following call numbers in ascending order:</p>
+
+    <div id="timer" class="text-center"></div> @*Timer display A gamification feature is implemented.*@
+
+
+    <form asp-action="CheckOrder" method="post">
+        <div class="form-group">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <label for="OrderedCallNumbers[@i]">Call Number @i:</label>
+                <input type="text" id="OrderedCallNumbers[@i]" name="OrderedCallNumbers[@i]" class="form-control" value="@Model[i]" />
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    //The countdown timer duration is set in seconds
+    var timerDuration = 180; 
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                // Timer has expired, submit the form or take appropriate action
+                clearInterval(timerInterval); // Stop the timer
+                alert("Time's up! Submitting your answers.");
+                document.forms[0].submit(); // Submit the form
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var timerDisplay = document.getElementById("timer");
+        startTimer(timerDuration, timerDisplay);
+    };
+</script>
+@*Alumni Network (2019)*@
+
+
+@*[6]Alumni Network (2019) How to create a countdown timer, freecodecamp.org. Available at:
+https://www.freecodecamp.org/news/how-to-create-a-countdown-timer/ (Accessed: September 26, 2023).*@
